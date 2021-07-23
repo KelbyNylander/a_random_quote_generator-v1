@@ -91,7 +91,13 @@ let quotes = [
   {
       quote:  "I only make movies to finance my fishing",
       source: "Lee Marvin"
-  }
+  },
+  {
+      quote:  "Perhaps I should not have been a fisherman, he thought. But that was the thing I was born for.",
+      source: "Ernest Hemingway",
+      citation: "The Old Man and the Sea",
+      year: "1952"
+},
   ];
   
   console.log(quotes);
