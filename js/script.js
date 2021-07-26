@@ -18,31 +18,38 @@ let quotes = [
   },
   {
       quote: "Somebody just back of you while you are fishing is as bad as someone looking over your shoulder while you write a letter to your girl",
-      source: "Ernest Hemingway"
+      source: "Ernest Hemingway",
+      tags: "Author"
   },
   {
       quote: "I've gone fishing thousands of times in my life, and I have never once felt unlucky or poorly paid for those hours on the water",
-      source: "William Tapply"
+      source: "William Tapply",
+      tags: "Author"
   },
   {
       quote: "Angling is extremely time consuming. That's sort of the whole point",
-      source: "Thomas McGuane"
+      source: "Thomas McGuane",
+      tags: "Author"
   },
   {
       quote: "It is impossible to grow weary of a sport that is never the same on any two days of the year",
-      source: "Theodore Gordon"
+      source: "Theodore Gordon",
+      tags: "Author"
   },
   {
       quote: "The solution to any problem — work, love, money, whatever is to go fishing, and the worse the problem, the longer the trip should be",
-      source: "John Gierach"
+      source: "John Gierach",
+      tags: "Author"
   },
   {
       quote: "If fishing is interfering with your business, give up your business",
-      source: "Sparse Grey Hackle"
+      source: "Sparse Grey Hackle",
+      tags: "aka Alfred W. Miller"
   },
   {
       quote: "Fishing is not an escape from life, but often a deeper immersion into it",
-      source: "Harry Middleton"
+      source: "Harry Middleton",
+      tags: "Author"
   },
   {
       quote: "By the time I had turned thirty, I'd realized two important things. One, I had to fish. Two, I had to work for a living",
@@ -50,11 +57,13 @@ let quotes = [
   },
   {
       quote: "I go fishing not to find myself but to lose myself",
-      source: "Joseph Monniger"
+      source: "Joseph Monniger",
+      tags: "Author"
   },
   {
       quote:  "Calling fishing a hobby is like calling brain surgery a job",
-      source: "Paul Schullery"
+      source: "Paul Schullery",
+      tags: "Author"
   },
   {
       quote:  "Many of the most highly publicized events of my presidency are not nearly as memorable or significant in my life as fishing with my daddy",
@@ -62,19 +71,23 @@ let quotes = [
   },
   {
       quote:  "Scholars have long known that fishing eventually turns men into philosophers. Unfortunately, it is almost impossible to buy decent tackle on a philosopher's salary",
-      source: "Patrick McManus"
+      source: "Patrick McManus",
+      tags: "Author"
   },
   {
       quote:  "Do not tell fish stories where the people know you. Particularly, don't tell them where they know the fish",
-      source: "Mark Twain"
+      source: "Mark Twain",
+      tags: "Author"
   },
   {
       quote:  "The best time to go fishing is when you can get away",
-      source: "Robert Traver"
+      source: "Robert Traver",
+      tags: "Author"
   },
   {
       quote:  "Everyone should believe in something. I believe I'll go fishing",
-      source: "Henry David Thoreau"
+      source: "Henry David Thoreau",
+      tags: "Author"
   },
   {
       quote:  "If all politicians fished, instead of spoke publicly, we would be at peace with the world",
@@ -82,7 +95,8 @@ let quotes = [
   },
   {
       quote:  "No life is so happy and so pleasant as the life of the well-govern'd angler",
-      source: "Izaak Walton"
+      source: "Izaak Walton",
+      tags: "Author"
   },
   {
       quote:  "I don't want to sit at the head table anymore. I want to go fishing",
@@ -96,37 +110,57 @@ let quotes = [
       quote:  "Perhaps I should not have been a fisherman, he thought. But that was the thing I was born for.",
       source: "Ernest Hemingway",
       citation: "The Old Man and the Sea",
-      year: "1952"
+      year: "1952",
+      tags: "Author"
 },
-  ];
-  
-  console.log(quotes);
+  ]; // array of 21 quotes
 
 /***
  * `getgetRandomQuote` function
 ***/
 
-let arrayLength = quotes.length;
-
 function getRandomQuote() {
-    return Math.floor(Math.random() * arrayLength);
+    return quotes[Math.floor(Math.random() * quotes.length)];
+    getRandomColor();
 }
-
-console.log(getRandomQuote());
+// getRandomQuote function operates on one line also pulling information from the array don't miss the [] 
+console.log(getRandomQuote()); // added to test and debug function
 
 
 /***
  * `printQuote` function
 ***/
 
-function printQuote( ) {
-  let i = getRandomQuote(quotes);
-  let quote = quotes[i]
-  return quote;
+function getRandomColor( ){
+  let r = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  let rgb = `rgb(${r}, ${g} ,${b})`;
+  document.body.style.background = rgb; 
 }
 
-console.log(printQuote());
+function printQuote ( ) {
+  let calledQuote = getRandomQuote();
+  let html = `
+  <p class="quote">${calledQuote.quote}</p>
+  <p class="source"> ${calledQuote.source}
+  ` // closed template literal
+  if (calledQuote.citation) {
+    html += `<span class=  "citation" >${calledQuote.citation}</span >`   
+  }
+  if (calledQuote.year) {
+    html += `<span class=  "year" >${calledQuote.year}</span >`   
+  }
+  if (calledQuote.tags) {
+    html += `<span class= "tags" >${calledQuote.tags}</span >`
+  }
+html += `</p>`;
+document.getElementById('quote-box').innerHTML = html;
+}
 
+setInterval(() => { // extra credit work
+  printQuote();
+}, 10000); // 10,000 milliseconds = 10 second delay
 
 /***
  * click event listener for the print quote button
