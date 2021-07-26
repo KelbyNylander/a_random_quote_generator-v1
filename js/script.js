@@ -120,8 +120,8 @@ let quotes = [
 ***/
 
 function getRandomQuote() {
-    return quotes[Math.floor(Math.random() * quotes.length)];
-    getRandomColor();
+    let quote = quotes[Math.floor(Math.random() * quotes.length)];
+    return quote
 }
 // getRandomQuote function operates on one line also pulling information from the array don't miss the [] 
 console.log(getRandomQuote()); // added to test and debug function
@@ -155,6 +155,7 @@ function printQuote ( ) {
     html += `<span class= "tags" >${calledQuote.tags}</span >`
   }
 html += `</p>`;
+getRandomColor();
 document.getElementById('quote-box').innerHTML = html;
 }
 
